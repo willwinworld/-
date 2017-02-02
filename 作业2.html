@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>part2</title>
+</head>
+<body onload="do_game()">
+<script>
+    var colors = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+    var random_index;
+    var random_color;
+    var guess_text;
+    var count = 0;
+    var finished = false;
+
+    function do_game() {
+        random_index = Math.floor((colors.length - 1) * Math.random());
+        random_color = colors[random_index];
+
+        alert("The color is " + random_color);
+        while (!finished)
+        {
+            guess_text = prompt("I am thinking one of these colors" +
+                "\n\n" + "blue, cyan, gold, gray, green, magenta, orange, red, white, yellow"
+                + "\n\n" + "What color am I thinking of?");
+            count++;
+            if(guess_text === "target")
+                alert(random_color);
+            finished = check_guess();
+            if (finished)
+            {
+                document.getElementsByTagName("body")[0].style.background = guess_text;
+            }
+        }
+    }
+
+    function check_guess() {
+        if(colors.indexOf(guess_text) === -1) {
+            alert("Please type in right color!");
+            return false;
+        }
+        if(guess_text.charAt(0) < random_color.charAt(0)) {
+            alert("Your color is alphabetically lower!");
+            return false;
+        }
+        if(guess_text.charAt(0) > random_color.charAt(0)) {
+            alert("Your color is alphabetically higher!");
+            return false;
+        }
+        alert("You got it!The color was " + guess_text +
+            "\n\nIt took you " + count +
+            " guesses to get the color!");
+        return true;
+    }
+</script>
+</body>
+</html>
