@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            background: #ccc;
+        }
+        img {
+            position: absolute;
+        }
+        h1, p {
+            margin: 10px;
+        }
+        #gameWrapper {
+            width: 810px;
+            display: block;
+            margin: 10px auto;
+            background: #fff;
+            text-align: center;
+        }
+        #leftSide, #rightSide {
+            width: 400px;
+            height: 400px;
+            display: inline-block;
+            position: relative;
+        }
+        #rightSide {
+            border-left: solid 2px #333;
+        }
+    </style>
+</head>
+<body onload="generateFaces()">
+<h1>Matching Game</h1>
+<p>Click on the extra smiling face, on the left.</p>
+<div id="gameWrapper">
+    <div id="leftSide"></div>
+    <div id="rightSide"></div>
+</div>
+
+<script type="text/javascript">
+    var numberOfFaces = 5;
+    var theLeftSide = document.getElementById('leftSide');
+    var theRightSide = document.getElementById('rightSide');
+
+    function generateFaces() {
+        //create and add faces
+        var count = 0;
+        while(count < 5) {
+            var img = document.createElement('img');
+            var left = Math.floor(Math.random() * 300);
+            var top = Math.floor(Math.random() * 300);
+            img.src="smile.png";
+            img.style.left = left + "px";
+            img.style.top = top + "px";
+            theLeftSide.appendChild(img);
+
+            count++;
+        }
+
+        //copy faces to right side
+        var leftSideImages = theLeftSide.cloneNode(true);
+        leftSideImages.removeChild(leftSideImages.lastChild);
+        theRightSide.appendChild(leftSideImages);
+    };
+</script>
+</body>
+</html>
